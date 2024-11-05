@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app_rodrigo_4sa/domain/entities/message.dart';
 
-//Puntos para luis, Ader, Pablo, Daniel Chalé, Kevin
-
 class ChatProvider extends ChangeNotifier {
   List<Message> messageList = [
     Message(text: 'Hola Ader', fromWho: FromWho.me),
-    Message(text: '¿Lloras porque reprobaste tópicos?', fromWho: FromWho.me)
+    Message(text: '¿Lloras porque reprobaste tópicos?', fromWho: FromWho.me),
   ];
   //Controlador para manejar la posición del scroll
   final ScrollController chatScrollController = ScrollController();
@@ -25,6 +23,7 @@ class ChatProvider extends ChangeNotifier {
 
   //Mover el scroll al último mensaje
   Future<void> moveScrollToBottom() async {
+    if (chatScrollController.hasClients) {
     //Un pequeño atraso en la animación para garantizar que siempre
     //se verá aún cuando se envíen mensajes cortos y rápidos
     await Future.delayed(const Duration(seconds: 1));
@@ -36,5 +35,6 @@ class ChatProvider extends ChangeNotifier {
         duration: const Duration(milliseconds: 300),
         //"Rebote" al final de la animación
         curve: Curves.easeOut);
+    }
   }
 }
