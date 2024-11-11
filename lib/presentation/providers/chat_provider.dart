@@ -31,20 +31,29 @@ class ChatProvider extends ChangeNotifier {
 
   //Mover el scroll al último mensaje
   Future<void> moveScrollToBottom() async {
-    if (chatScrollController.hasClients) {
-      //Un pequeño atraso en la animación para garantizar que siempre
-      //se verá aún cuando se envíen mensajes cortos y rápidos
-      await Future.delayed(const Duration(seconds: 1));
-      chatScrollController.animateTo(
-          //Offset: posición de la animación
-          //maxScrollExtent determina a lo máximo que el scroll puede dar
-          chatScrollController.position.maxScrollExtent,
-          //Duración de la animación
-          duration: const Duration(milliseconds: 300),
-          //"Rebote" al final de la animación
-          curve: Curves.easeOut);
-    }
+    //Un pequeño retraso en la animación para garantizar que siempre se verá aún cuando se envíen mensajes demasiado cortos y rápidos.
+    await Future.delayed(const Duration(milliseconds: 100));
+    chatScrollController.animateTo(
+        //maxScrollExtent determina a lo máximo que el scroll puede dar. Este es el comportamiento necesario porque en cuanto se termine de poner un mensaje es cuando yo requiero que se ajuste en la posición máxima para ver ese último mensaje.
+        chatScrollController
+            .position.maxScrollExtent, //offset: posición de la animación
+        duration: const Duration(
+            milliseconds: 300), //Duración de la animación en constante
+        curve: Curves.easeOut); //"Rebote" al final de la animación
   }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   Future<void> herReply() async {
     //Obtener el mensaje de la petición

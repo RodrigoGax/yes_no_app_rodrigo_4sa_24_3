@@ -41,6 +41,9 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
                 child: ListView.builder(
+                    //Enlaza al controlador creado en ChatProvider
+                    controller: chatProvider.chatScrollController,
+                    //Se pone la longitud de la lista que se encuentra en Chatprovider
                     itemCount: chatProvider.messageList.length,
                     itemBuilder: (context, index) {
                       //Instancia del message que sabrá de quién es el mensaje

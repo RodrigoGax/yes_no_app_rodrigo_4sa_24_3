@@ -23,7 +23,7 @@ class YesNoModel {
       );
 
   Message toMessageEntity() => Message(
-      //Condicional ternario para darle valor a los mensajes kevin, jesús, samx2, angela, luis, gasca
+      //Condicional ternario para darle valor a los mensajes
       text: answer == 'yes'
           ? 'Sí'
           : answer == 'no'
